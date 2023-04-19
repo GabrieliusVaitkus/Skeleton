@@ -124,7 +124,7 @@ namespace Testing3
             Boolean Found = false;
 
             //Create test data
-            Int32 staffNo = 21;
+            Int32 staffNo = 2;
 
             //invoke the method
             Found = staffNumber.Find(staffNo);
@@ -146,13 +146,13 @@ namespace Testing3
             Boolean OK = true;
 
             //create test data
-            Int32 staffNo = 21;
+            Int32 staffNo = 2;
 
             //Invoke the method
             Found = staffNumber.Find(staffNo);
 
             //Check the staff number
-            if (staffNumber.staffNo != 21)
+            if (staffNumber.staffNo != 2)
             {
                 OK = false;
             }

@@ -68,7 +68,7 @@ namespace Testing5
         {
             clsSupplier ASupplier = new clsSupplier();
             Boolean Found = false;
-            Int32 supplierNo = 21;
+            Int32 supplierNo = 1;
             Found = ASupplier.Find(supplierNo);
             Assert.IsTrue(Found);
         }
@@ -83,11 +83,11 @@ namespace Testing5
             //record if data is OK
             Boolean OK = true;
             //create test data to use with the method
-            Int32 supplierNo = 21;
+            Int32 supplierNo = 1;
             //Invoke method
             Found = ASupplier.Find(supplierNo);
             // check customer number
-            if (ASupplier.supplierNo != 21)
+            if (ASupplier.supplierNo != 1)
             {
                 OK = false;
             }
@@ -101,9 +101,9 @@ namespace Testing5
             clsSupplier ASupplier = new clsSupplier();
             Boolean Found = false;
             Boolean OK = true;
-            Int32 supplierNo = 21;
+            Int32 supplierNo = 1;
             Found = ASupplier.Find(supplierNo);
-            if (ASupplier.supplierName != "Test Name")
+            if (ASupplier.supplierName != "alibaba")
             {
                 OK = false;
             }
@@ -116,9 +116,9 @@ namespace Testing5
             clsSupplier ASupplier = new clsSupplier();
             Boolean Found = false;
             Boolean OK = true;
-            Int32 supplierNo = 21;
+            Int32 supplierNo = 1;
             Found = ASupplier.Find(supplierNo);
-            if (ASupplier.supplierContactNo != "0756945")
+            if (ASupplier.supplierContactNo != "07856162654")
             {
                 OK = false;
             }
@@ -130,9 +130,9 @@ namespace Testing5
             clsSupplier ASupplier = new clsSupplier();
             Boolean Found = false;
             Boolean OK = true;
-            Int32 supplierNo = 21;
+            Int32 supplierNo = 1;
             Found = ASupplier.Find(supplierNo);
-            if (ASupplier.supplierEmail != "TestEmail@Email.com")
+            if (ASupplier.supplierEmail != "alibaba54@gmail.com")
             {
                 OK = false;
             }
@@ -145,9 +145,9 @@ namespace Testing5
             clsSupplier ASupplier = new clsSupplier();
             Boolean Found = false;
             Boolean OK = true;
-            Int32 supplierNo = 21;
+            Int32 supplierNo = 1;
             Found = ASupplier.Find(supplierNo);
-            if (ASupplier.supplierAddress != "Test Address")
+            if (ASupplier.supplierAddress != "24 shipton road, NN10 9BE")
             {
                 OK = false;
             }
@@ -160,10 +160,10 @@ namespace Testing5
             clsSupplier ASupplier = new clsSupplier();
             Boolean Found = false;
             Boolean OK = true;
-            Int32 supplierNo = 21;
+            Int32 supplierNo = 1;
             //imvoke the method
             Found = ASupplier.Find(supplierNo);
-            if (ASupplier.dateRegistered != Convert.ToDateTime("05/11/2021"))
+            if (ASupplier.dateRegistered != Convert.ToDateTime("20/02/2022"))
             {
                 OK = false;
             }
@@ -177,7 +177,7 @@ namespace Testing5
             clsSupplier ASupplier = new clsSupplier();
             Boolean Found = false;
             Boolean OK = true;
-            Int32 supplierNo = 21;
+            Int32 supplierNo = 1;
             Found = ASupplier.Find(supplierNo);
             if (ASupplier.active != true)
             {
