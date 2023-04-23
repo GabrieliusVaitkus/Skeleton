@@ -141,5 +141,49 @@ namespace Testing5
             Assert.IsFalse(Found);
 
         }
+
+        [TestMethod]
+        public void ReportBySupplierNameMethodOK()
+        {
+            clsSupplierCollection AllSupplier = new clsSupplierCollection();
+            clsSupplierCollection FilteredSupplier = new clsSupplierCollection();
+            FilteredSupplier.ReportBysupplierName("");
+            Assert.AreEqual(AllSupplier.Count, FilteredSupplier.Count);
+        }
+
+        [TestMethod]
+        public void ReportBySupplierNameNoneFound()
+        {
+            clsSupplierCollection FilteredSupplier = new clsSupplierCollection();
+            FilteredSupplier.ReportBysupplierName("xxxxx");
+            Assert.AreEqual(0, FilteredSupplier.Count);
+        }
+
+        [TestMethod]
+        public void ReportBySupplierNameTestDataFound()
+        {
+            clsSupplierCollection FilteredSupplier = new clsSupplierCollection();
+            Boolean OK = true;
+            FilteredSupplier.ReportBysupplierName("GoPokemon");
+            if (FilteredSupplier.Count == 2)
+            {
+                if (FilteredSupplier.SupplierList[0].supplierNo != 27)
+                {
+                    OK = false;
+                }
+
+                if (FilteredSupplier.SupplierList[1].supplierNo != 28)
+                {
+                    OK = false;
+                }
+            }
+
+            else
+            {
+                OK = false;
+            }
+
+            Assert.IsFalse(OK);
+        }
     }
 }

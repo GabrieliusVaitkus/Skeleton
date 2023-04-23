@@ -10,27 +10,9 @@ namespace ClassLibrary
 
         public clsSupplierCollection()
         {
-            Int32 Index = 0;
-            Int32 RecordCount = 0;
             clsDataConnection DB = new clsDataConnection();
             DB.Execute("sproc_tblSupplier_SelectAll");
-            RecordCount = DB.Count;
-            while (Index < RecordCount)
-            {
-                clsSupplier ASupplier = new clsSupplier();
-
-                ASupplier.supplierNo = Convert.ToInt32(DB.DataTable.Rows[Index]["supplierNo"]);
-                ASupplier.supplierName = Convert.ToString(DB.DataTable.Rows[Index]["supplierName"]);
-                ASupplier.supplierContactNo = Convert.ToString(DB.DataTable.Rows[Index]["supplierContactNo"]);
-                ASupplier.supplierEmail = Convert.ToString(DB.DataTable.Rows[Index]["supplierEmail"]);
-                ASupplier.supplierAddress = Convert.ToString(DB.DataTable.Rows[Index]["supplierAddress"]);
-                ASupplier.dateRegistered = Convert.ToDateTime(DB.DataTable.Rows[Index]["dateRegistered"]);
-                ASupplier.active = Convert.ToBoolean(DB.DataTable.Rows[Index]["active"]);
-
-                mSupplierList.Add(ASupplier);
-
-                Index++;
-            }
+            PopulateArray(DB);
 
         }
         public List<clsSupplier> SupplierList
@@ -103,5 +85,35 @@ namespace ClassLibrary
             DB.Execute("sproc_tblSupplier_Delete");
         }
 
+        public void ReportBysupplierName(string supplierName)
+        {
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@supplierName", supplierName);
+            DB.Execute("sproc_tblSupplier_FilterBySupplierName");
+            PopulateArray(DB);
+        }
+
+        void PopulateArray(clsDataConnection DB)
+        {
+            Int32 Index = 0;
+            Int32 RecordCount;
+            RecordCount = DB.Count;
+            mSupplierList = new List<clsSupplier>();
+            while (Index < RecordCount)
+            {
+                clsSupplier ASupplier = new clsSupplier();
+
+                ASupplier.supplierNo = Convert.ToInt32(DB.DataTable.Rows[Index]["supplierNo"]);
+                ASupplier.supplierName = Convert.ToString(DB.DataTable.Rows[Index]["supplierName"]);
+                ASupplier.supplierContactNo = Convert.ToString(DB.DataTable.Rows[Index]["supplierContactNo"]);
+                ASupplier.supplierEmail = Convert.ToString(DB.DataTable.Rows[Index]["supplierEmail"]);
+                ASupplier.supplierAddress = Convert.ToString(DB.DataTable.Rows[Index]["supplierAddress"]);
+                ASupplier.dateRegistered = Convert.ToDateTime(DB.DataTable.Rows[Index]["dateRegistered"]);
+                ASupplier.active = Convert.ToBoolean(DB.DataTable.Rows[Index]["active"]);
+
+                mSupplierList.Add(ASupplier);
+                Index++;
+            }
+        }
     }
 }
