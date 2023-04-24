@@ -64,16 +64,16 @@ namespace Testing2
             Assert.AreEqual(AnOrder.OrderDate, TestData);
         }
         [TestMethod]
-        public void PriceOk()
+        public void TotalPriceOk()
         {
             //create an instance of the class we want to create
             clsOrder AnOrder = new clsOrder();
             //create some test data to assign to the Item
             decimal TestData = new decimal(4.2);
             //Assign the data to the item
-            AnOrder.Price = TestData;
+            AnOrder.TotalPrice = TestData;
             //test to see that the two values are the same
-            Assert.AreEqual(AnOrder.Price, TestData);
+            Assert.AreEqual(AnOrder.TotalPrice, TestData);
         }
     }
 }
