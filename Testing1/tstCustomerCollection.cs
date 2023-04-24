@@ -42,7 +42,7 @@ namespace Testing1
             // instance of class created
             clsCustomerCollection AllCustomers = new clsCustomerCollection();
             //Some test data to assign to property
-            Int32 SomeCount = 0;
+            Int32 SomeCount = 2;
             //assign date to property
             AllCustomers.Count = SomeCount;
             //test to see that the two values are the same
@@ -87,13 +87,14 @@ namespace Testing1
             Assert.AreEqual(AllCustomers.Count, TestList.Count);
 
         }
-        //[TestMethod]
-        //public void TwoRecordsPresent()
-        //{
-        //    clsCustomerCollection AllCustomers = new clsCustomerCollection();
-        //    Assert.AreEqual(AllCustomers.Count, 2);
-        //}
-            
+        [TestMethod]
+        public void TwoRecordsPresent()
+        {
+            clsCustomerCollection AllCustomers = new clsCustomerCollection();
+            Assert.AreEqual(AllCustomers.Count, 2);
+        }
+
+
     }
 }
 
