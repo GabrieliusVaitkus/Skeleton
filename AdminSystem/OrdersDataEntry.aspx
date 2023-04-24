@@ -7,10 +7,11 @@
     <title></title>
 </head>
 <body>
-    This is the order entry page
     <form id="form1" runat="server">
         <div>
+            <asp:TextBox ID="txtOrderNo" runat="server" style="z-index: 1; left: 127px; top: 70px; position: absolute"></asp:TextBox>
         </div>
+        <asp:Label ID="tblOrderNo" runat="server" style="z-index: 1; left: 10px; top: 72px; position: absolute; height: 22px; width: 100px" Text="Order Number"></asp:Label>
     </form>
 </body>
 </html>
