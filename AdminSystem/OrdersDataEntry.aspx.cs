@@ -17,8 +17,14 @@ public partial class _1_DataEntry : System.Web.UI.Page
     {
         // create a new instance of clsOrder
         clsOrder AnOrder = new clsOrder();
-        // capture the Delivery address
+        // capture the input data
+        
+        AnOrder.OrderNo = Convert.ToInt32(txtOrderNo.Text);
+        AnOrder.Quantity = Convert.ToInt32(txtQuantity.Text);
         AnOrder.DeliveryAddress = txtDeliveryAddress.Text;
+        AnOrder.OrderDate = Convert.ToDateTime(txtOrderDate.Text);
+        AnOrder.Delivered = chkDelivered.Checked;
+        AnOrder.TotalPrice = (decimal)Convert.ToDouble(txtTotalPrice.Text);
         // store the delivery address in the session object
         Session["AnOrder"] = AnOrder;
         //naviage to the viewer page
