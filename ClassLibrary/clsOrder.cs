@@ -18,15 +18,26 @@ namespace ClassLibrary
         public string DeliveryAddress { get { return mDeliveryAddress; } set { mDeliveryAddress = value; } }
         public decimal TotalPrice { get { return mTotalPrice; } set { mTotalPrice = value; } }
 
-        public bool Find(int orderNo)
+        public bool Find(int OrderNo)
         {
-            mOrderNo = 1;
-            mOrderDate = Convert.ToDateTime("31/01/2023");
-            mDeliveryAddress = "96 alan road";
-            mTotalPrice = Convert.ToDecimal(8.99);
-            mQuantity = 5;
-            mDelivered = true;
-            return true;
+            clsDataConnection DB = new clsDataConnection();
+            DB.addParameter("@OrderNo", OrderNo);
+            DB.Execute("sproc_tblOrder_FilterByOrderNo");
+            // if one record is found (will be one or zero)
+            if (DB.Count == 1)
+            {
+                mOrderNo = Convert.ToInt32(DB.DataTable.Rows[0]["OrderNo"]);
+                mOrderDate = Convert.ToDateTime(DB.DataTable.Rows[0]["OrderDate"]);
+                mDeliveryAddress = Convert.ToString(DB.DataTable.Rows[0]["DeliveryAddress"]);
+                mTotalPrice = Convert.ToDecimal(DB.DataTable.Rows[0]["TotalPrice"]);
+                mQuantity = Convert.ToInt32(DB.DataTable.Rows[0]["Quantity"]);
+                mDelivered = Convert.ToBoolean(DB.DataTable.Rows[0]["Delivered"]);
+                return true;
+
+            }
+            // if no record is found
+            else { return false; }
+
         }
     }
 }
