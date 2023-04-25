@@ -54,4 +54,26 @@ public partial class _1_DataEntry : System.Web.UI.Page
     {
 
     }
+
+    protected void btnFind_Click(object sender, EventArgs e)
+    {
+        clsStock AnStock = new clsStock();
+        Int32 CardNo;
+        Boolean Found = false;
+        CardNo = Convert.ToInt32(txtCardNo.Text);
+        Found = AnStock.Find(CardNo);
+        if (Found == true)
+        {
+            txtCardDescription.Text = AnStock.CardDescription;
+            txtCardType.Text = AnStock.CardType;
+            txtPrice.Text = Convert.ToString(AnStock.Price);
+            txtDateAdded.Text = AnStock.DateAdded.ToString();
+            chkAvailable.Checked = AnStock.Available;
+            
+
+
+
+
+        }
+    }
 }

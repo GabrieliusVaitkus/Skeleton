@@ -8,24 +8,84 @@ using ClassLibrary;
 
 public partial class _1_DataEntry : System.Web.UI.Page
 {
+    Int32 supplierNo;
     protected void Page_Load(object sender, EventArgs e)
     {
+        supplierNo = Convert.ToInt32(Session["supplierNo"]);
+        if (IsPostBack == false)
+        {
+            if (supplierNo != -1)
+            {
+                DisplaySupplier();
+            }
+        }
+
+    }
+
+    private void DisplaySupplier()
+    {
+        clsSupplierCollection SupplierBook = new clsSupplierCollection();
+        SupplierBook.ThisSupplier.Find(supplierNo);
+        txtSupplierNo.Text = SupplierBook.ThisSupplier.supplierNo.ToString();
+        txtSupplierName.Text = SupplierBook.ThisSupplier.supplierName;
+        txtSupplierContactNo.Text = SupplierBook.ThisSupplier.supplierContactNo;
+        txtSupplierEmail.Text = SupplierBook.ThisSupplier.supplierEmail;
+        txtSupplierAddress.Text = SupplierBook.ThisSupplier.supplierAddress;
+        txtDateRegistered.Text = SupplierBook.ThisSupplier.dateRegistered.ToString();
+        chkActive.Checked = SupplierBook.ThisSupplier.active;
 
     }
 
     protected void btnOK_Click(object sender, EventArgs e)
     {
-        //New instance of supplierNo
-        clsSupplier ASupplierNo = new clsSupplier();
+        //New instance of clsSupplier
+        clsSupplier ASupplier = new clsSupplier();
 
         //Capture the name
-        ASupplierNo.supplierName = txtSupplierName.Text;
+        string supplierName = txtSupplierName.Text;
+        string supplierContactNo = txtSupplierContactNo.Text;
+        string supplierEmail = txtSupplierEmail.Text;
+        string supplierAddress = txtSupplierAddress.Text;
+        string dateRegistered = txtDateRegistered.Text;
 
-        //Store the name in the session
-        Session["ASupplierNo"] = ASupplierNo;
+        string Error = "";
+        Error = ASupplier.Valid(supplierName, supplierContactNo, supplierEmail, supplierAddress, dateRegistered);
 
-        //Navigate to the viewer page
-        Response.Redirect("SupplierViewer.aspx");
+        if (Error == "")
+        {
+            ASupplier.supplierNo = supplierNo;
+            ASupplier.supplierName = supplierName;
+            ASupplier.supplierContactNo = supplierContactNo;
+            ASupplier.supplierEmail = supplierEmail;
+            ASupplier.supplierAddress = supplierAddress;
+            ASupplier.dateRegistered = Convert.ToDateTime(dateRegistered);
+
+            clsSupplierCollection SupplierList = new clsSupplierCollection();
+            SupplierList.ThisSupplier = ASupplier;
+            SupplierList.Add();
+
+            Response.Redirect("SupplierList.aspx");
+
+            if (supplierNo == -1)
+            {
+                SupplierList.ThisSupplier = ASupplier;
+                SupplierList.Add();
+            }
+
+            else
+            {
+                SupplierList.ThisSupplier.Find(supplierNo);
+                SupplierList.ThisSupplier = ASupplier;
+                SupplierList.Update();
+            }
+
+            Response.Redirect("SupplierList.aspx");
+        }
+
+        else
+        {
+            lblError.Text = Error;
+        }
     }
 
     protected void btnFind_Click(object sender, EventArgs e)
@@ -51,5 +111,10 @@ public partial class _1_DataEntry : System.Web.UI.Page
             txtDateRegistered.Text = ASupplier.dateRegistered.ToString();
             chkActive.Checked = ASupplier.active;
         }
+    }
+
+    protected void btnCancel_Click(object sender, EventArgs e)
+    {
+        Response.Redirect("SupplierList.aspx");
     }
 }

@@ -7,6 +7,11 @@ namespace Testing4
     [TestClass]
     public class tstStock
     {
+        string CardDescription = "Psychic";
+        string CardType = "Energy";
+        decimal Price = Convert.ToDecimal(9.100);
+        string DateAdded = DateTime.Now.Date.ToString();
+
         [TestMethod]
         public void InstanceOK()
         {
@@ -62,7 +67,7 @@ namespace Testing4
             //create an instance of the class we want to create
             clsStock AnStock = new clsStock();
             //create some test data to assign to the Item
-            string TestData = "This is the card Description";
+            string TestData = "Water";
             //Assign the data to the item
             AnStock.CardDescription = TestData;
             //test to see that the two values are the same
@@ -90,10 +95,162 @@ namespace Testing4
             //create some test data to assign to the Item
             decimal TestData = 975;
             //Assign the data to the item
-            AnStock.CardPrice = TestData;
+            AnStock.Price = TestData;
             //test to see that the two values are the same
-            Assert.AreEqual(AnStock.CardPrice, TestData);
+            Assert.AreEqual(AnStock.Price, TestData);
         }
+
+        [TestMethod]
+        public void FindMethodOK()
+        {
+            //create an instance of the class we want to create
+            clsStock AnStock = new clsStock();
+            //Bollean variable to store the results of the validation
+            Boolean Found = false;
+            //Create some test data to use with the method
+            Int32 CardNo = 1006;
+            //invoke the method
+            Found = AnStock.Find(CardNo);
+            //Test to see if the result is true
+            Assert.IsTrue(Found);
+        }
+
+        [TestMethod]
+        public void TestCardNoFound()
+        {
+            //create an instance of the class we want to create
+            clsStock AnStock = new clsStock();
+            //Bolean variable to store the results of the search
+            Boolean Found = false;
+            //Bolean variable to record if data is OK (Assume it is)
+            Boolean ok = true;
+            //Create some test data to use with the method
+            Int32 CardNo = 1006;
+            //invoke the method
+            Found = AnStock.Find(CardNo);
+            //check the address no
+            if (AnStock.CardNo != 1006)
+            {
+                ok = false;
+            }
+            //test to see that the result is correct
+            Assert.IsTrue(ok);
+        }
+
+        [TestMethod]
+        public void TestDateAddedFound()
+        {
+            //create an instance of the class we want to create
+            clsStock AnStock = new clsStock();
+            //boolean variable to store the result of the search
+            Boolean Found = false;
+            //boolean variable to record if data is OK (assume it is)
+            Boolean OK = true;
+            //create some test data to use with the method
+            Int32 CardNo = 1006;
+            //invoke the method
+            Found = AnStock.Find(CardNo);
+            //check the property
+            if (AnStock.DateAdded != Convert.ToDateTime("03/08/2020"))
+            {
+                OK = false;
+            }
+            //test to see that the result is correct
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestAvailableFound()
+        {
+            //create an instance of the class we want to create
+            clsStock AnStock = new clsStock();
+            //boolean variable to store the result of the search
+            Boolean Found = false;
+            //boolean variable to record if data is OK (assume it is)
+            Boolean OK = true;
+            //create some test data to use with the method
+            Int32 CardNo = 1006;
+            //invoke the method
+            Found = AnStock.Find(CardNo);
+            //check the property
+            if (AnStock.Available != true)
+            {
+                OK = false;
+            }
+            //test to see that the result is correct
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestPriceFound()
+        {
+            //create an instance of the class we want to create
+            clsStock AnStock = new clsStock();
+            //boolean variable to store the result of the search
+            Boolean Found = false;
+            //boolean variable to record if data is OK (assume it is)
+            Boolean OK = true;
+            //create some test data to use with the method
+            Int32 CardNo = 1006;
+            //invoke the method
+            Found = AnStock.Find(CardNo);
+            //check the property
+            if (AnStock.Price != Convert.ToDecimal(9.100))
+            {
+                OK = false;
+            }
+            //test to see that the result is correct
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestCardTypeFound()
+        {
+            //create an instance of the class we want to create
+            clsStock AnStock = new clsStock();
+            //boolean variable to store the result of the search
+            Boolean Found = false;
+            //boolean variable to record if data is OK (assume it is)
+            Boolean OK = true;
+            //create some test data to use with the method
+            Int32 CardNo = 1006;
+            //invoke the method
+            Found = AnStock.Find(CardNo);
+            //check the property
+            if (AnStock.CardType != "Energy")
+            {
+                OK = false;
+            }
+            //test to see that the result is correct
+            Assert.IsTrue(OK);
+        }
+
+        [TestMethod]
+        public void TestCardDescriptionFound()
+        {
+            //create an instance of the class we want to create
+            clsStock AnStock = new clsStock();
+            //boolean variable to store the result of the search
+            Boolean Found = false;
+            //boolean variable to record if data is OK (assume it is)
+            Boolean OK = true;
+            //create some test data to use with the method
+            Int32 CardNo = 1006;
+            //invoke the method
+            Found = AnStock.Find(CardNo);
+            //check the property
+            if (AnStock.CardDescription != "Psychic")
+            {
+                OK = false;
+            }
+            //test to see that the result is correct
+            Assert.IsTrue(OK);
+        }
+
+
+
+
+
 
 
 

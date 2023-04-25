@@ -10,6 +10,7 @@
     <form id="form1" runat="server">
         <div>
             <asp:Label ID="lblCustomerNo" runat="server" Text="Customer Number"></asp:Label>
+            <asp:Button ID="btnFind" runat="server" OnClick="btnFind_Click" style="z-index: 1; left: 322px; top: 10px; position: absolute; width: 39px; margin-top: 0px;" Text="Find" />
             <asp:TextBox ID="txtCustomerNo" runat="server"></asp:TextBox>
         </div>
         <p>
@@ -26,7 +27,7 @@
         </p>
         <asp:Label ID="lblContactNumber" runat="server" Text="Contact Number"></asp:Label>
 &nbsp;&nbsp;
-        <asp:TextBox ID="txtContactNumber" runat="server"></asp:TextBox>
+        <asp:TextBox ID="txtContactNumber" runat="server" OnTextChanged="txtCPhoneNo_TextChanged"></asp:TextBox>
         <p>
             <asp:Label ID="lblDateAdded" runat="server" Text="Date Added"></asp:Label>
 &nbsp;

@@ -26,8 +26,8 @@
         <asp:Label ID="lblStaffRole" runat="server" Text="Staff Role" width="82px"></asp:Label>
         <asp:TextBox ID="txtStaffRole" runat="server"></asp:TextBox>
         <br />
-        <asp:Label ID="lblStaffBirthDate" runat="server" Text="Staff Birth Date" width="82px"></asp:Label>
-        <asp:TextBox ID="txtStaffBirthDate" runat="server"></asp:TextBox>
+        <asp:Label ID="lblStaffDateAdded" runat="server" Text="Staff Date Added" width="82px"></asp:Label>
+        <asp:TextBox ID="txtStaffDateAdded" runat="server"></asp:TextBox>
         <br />
         <br />
         <asp:CheckBox ID="chkActive" runat="server" Text="Active" />
