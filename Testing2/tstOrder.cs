@@ -75,5 +75,34 @@ namespace Testing2
             //test to see that the two values are the same
             Assert.AreEqual(AnOrder.TotalPrice, TestData);
         }
+
+        [TestMethod]
+        public void FindMethodOk()
+        {
+            clsOrder AnOrder = new clsOrder();
+            // boolean variable to store the results of validation
+            Boolean Found = false;
+            // test data to find the OrderNO
+            Int32 OrderNo = 1;
+            Found = AnOrder.Find(OrderNo);
+            // test to see if it is true
+            Assert.IsTrue(Found);
+        }
+        [TestMethod]
+        public void TestOrderNoFound()
+        {
+            clsOrder AnOrder = new clsOrder();
+            // boolean variable to store the results of validation
+            Boolean Found = false;
+            // boolean if data is ok
+            Boolean OK = true;
+            Int32 OrderNo = 1;
+            Found = AnOrder.Find(OrderNo);
+            if (AnOrder.OrderNo != OrderNo)
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
+        }
     }
 }
