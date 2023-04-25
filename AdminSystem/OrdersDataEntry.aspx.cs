@@ -18,7 +18,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
         // create a new instance of clsOrder
         clsOrder AnOrder = new clsOrder();
         // capture the input data
-        
+
         AnOrder.OrderNo = Convert.ToInt32(txtOrderNo.Text);
         AnOrder.Quantity = Convert.ToInt32(txtQuantity.Text);
         AnOrder.DeliveryAddress = txtDeliveryAddress.Text;
@@ -29,6 +29,28 @@ public partial class _1_DataEntry : System.Web.UI.Page
         Session["AnOrder"] = AnOrder;
         //naviage to the viewer page
         Response.Redirect("OrdersViewer.aspx");
+    }
+
+    protected void btnFind_Click(object sender, EventArgs e)
+    {
+        // create a new instance of clsOrder
+        clsOrder AnOrder = new clsOrder();
+        // capture the input data
+        Int32 OrderNo;
+        Boolean Found = false;
+        // get primary key entered by the user
+        OrderNo = Convert.ToInt32(txtOrderNo.Text);
+        Found = AnOrder.Find(OrderNo);
+
+        if (Found == true)
+        {
+            txtQuantity.Text = Convert.ToString(AnOrder.Quantity);
+            txtDeliveryAddress.Text = AnOrder.DeliveryAddress;
+            txtOrderDate.Text = Convert.ToString(AnOrder.OrderDate);
+            chkDelivered.Checked = AnOrder.Delivered;
+            txtTotalPrice.Text = Convert.ToString(AnOrder.TotalPrice);
+            chkDelivered.Checked = AnOrder.Delivered;
+        }
     }
 }
 
