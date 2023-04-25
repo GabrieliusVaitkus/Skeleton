@@ -83,7 +83,7 @@ namespace Testing2
             // boolean variable to store the results of validation
             Boolean Found = false;
             // test data to find the OrderNO
-            Int32 OrderNo = 1;
+            Int32 OrderNo = 8;
             Found = AnOrder.Find(OrderNo);
             // test to see if it is true
             Assert.IsTrue(Found);
@@ -96,7 +96,7 @@ namespace Testing2
             Boolean Found = false;
             // boolean if data is ok
             Boolean OK = true;
-            Int32 OrderNo = 1;
+            Int32 OrderNo = 8;
             Found = AnOrder.Find(OrderNo);
             if (AnOrder.OrderNo != OrderNo)
             {
@@ -112,15 +112,15 @@ namespace Testing2
             Boolean Found = false;
             // boolean if data is ok
             Boolean OK = true;
-            Int32 OrderNo = 1;
+            Int32 OrderNo = 8;
             Found = AnOrder.Find(OrderNo);
-            if (AnOrder.OrderDate != Convert.ToDateTime("31/01/2023"))
+            if (AnOrder.OrderDate != Convert.ToDateTime("12/04/2023"))
             {
                 OK = false;
             }
             Assert.IsTrue(OK);
         }
-        
+
         [TestMethod]
         public void TestDeliveryAddress()
         {
@@ -129,9 +129,9 @@ namespace Testing2
             Boolean Found = false;
             // boolean if data is ok
             Boolean OK = true;
-            Int32 OrderNo = 1;
+            Int32 OrderNo = 8;
             Found = AnOrder.Find(OrderNo);
-            if (AnOrder.DeliveryAddress != "96 alan road")
+            if (AnOrder.DeliveryAddress != "1 wow road")
             {
                 OK = false;
             }
@@ -145,9 +145,9 @@ namespace Testing2
             Boolean Found = false;
             // boolean if data is ok
             Boolean OK = true;
-            Int32 OrderNo = 1;
+            Int32 OrderNo = 8;
             Found = AnOrder.Find(OrderNo);
-            if (AnOrder.TotalPrice != Convert.ToDecimal(8.99))
+            if (AnOrder.TotalPrice != Convert.ToDecimal(5.2))
             {
                 OK = false;
             }
@@ -161,9 +161,9 @@ namespace Testing2
             Boolean Found = false;
             // boolean if data is ok
             Boolean OK = true;
-            Int32 OrderNo = 1;
+            Int32 OrderNo = 8;
             Found = AnOrder.Find(OrderNo);
-            if (AnOrder.Quantity != 5)
+            if (AnOrder.Quantity != 2)
             {
                 OK = false;
             }
@@ -177,7 +177,7 @@ namespace Testing2
             Boolean Found = false;
             // boolean if data is ok
             Boolean OK = true;
-            Int32 OrderNo = 1;
+            Int32 OrderNo = 8;
             Found = AnOrder.Find(OrderNo);
             if (AnOrder.Delivered != true)
             {
@@ -185,6 +185,6 @@ namespace Testing2
             }
             Assert.IsTrue(OK);
         }
-        
+
     }
 }
