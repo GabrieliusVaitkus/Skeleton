@@ -228,7 +228,7 @@ namespace Testing2
             // string to store error message
             String Error = "";
             string DeliveryAddress = "";
-            DeliveryAddress.PadRight(300, 'a'); // should fail
+            DeliveryAddress.PadRight(257, 'a'); // should fail
             Error = AnOrder.Valid(Quantity, OrderDate, DeliveryAddress, TotalPrice);
             Assert.AreNotEqual(Error, "");
         }
@@ -280,7 +280,7 @@ namespace Testing2
             DateTime TestDate;
             //date is todays date
             TestDate = DateTime.Now.Date;
-            
+
             //convert date to a string
             string OrderDate = TestDate.ToString();
             //invoke method
@@ -334,6 +334,103 @@ namespace Testing2
             Error = AnOrder.Valid(Quantity, OrderDate, DeliveryAddress, TotalPrice);
             Assert.AreNotEqual(Error, "");
 
+        }
+        [TestMethod]
+        public void QuantityInvalidData()
+        {
+            clsOrder AnOrder = new clsOrder();
+            String Error = "";
+            //a variable to store test date data
+            string Quantity = "one hundred";
+            //invoke method
+            Error = AnOrder.Valid(Quantity, OrderDate, DeliveryAddress, TotalPrice);
+            Assert.AreNotEqual(Error, "");
+
+        }
+
+        [TestMethod]
+        public void QuantityMin()
+        {
+            clsOrder AnOrder = new clsOrder();
+            String Error = "";
+            //a variable to store test date data
+            string Quantity = "0";
+            //invoke method
+            Error = AnOrder.Valid(Quantity, OrderDate, DeliveryAddress, TotalPrice);
+            Assert.AreEqual(Error, "");
+
+        }
+        [TestMethod]
+        public void QuantityMinLessOne()
+        {
+            clsOrder AnOrder = new clsOrder();
+            String Error = "";
+            //a variable to store test date data
+            string Quantity = "-1";
+            //invoke method
+            Error = AnOrder.Valid(Quantity, OrderDate, DeliveryAddress, TotalPrice);
+            Assert.AreNotEqual(Error, "");
+
+        }
+        [TestMethod]
+        public void QuantityMinPlusOne()
+        {
+            clsOrder AnOrder = new clsOrder();
+            String Error = "";
+            //a variable to store test date data
+            string Quantity = "1";
+            //invoke method
+            Error = AnOrder.Valid(Quantity, OrderDate, DeliveryAddress, TotalPrice);
+            Assert.AreEqual(Error, "");
+        }
+        // totalPrice validate
+        [TestMethod]
+        public void TotalPriceInvalidData()
+        {
+            clsOrder AnOrder = new clsOrder();
+            String Error = "";
+            //a variable to store test date data
+            string TotalPrice = "one hundred pounds";
+            //invoke method
+            Error = AnOrder.Valid(Quantity, OrderDate, DeliveryAddress, TotalPrice);
+            Assert.AreNotEqual(Error, "");
+
+        }
+
+        [TestMethod]
+        public void TotalPriceMin()
+        {
+            clsOrder AnOrder = new clsOrder();
+            String Error = "";
+            //a variable to store test date data
+            string TotalPrice = "0.0";
+            //invoke method
+            Error = AnOrder.Valid(Quantity, OrderDate, DeliveryAddress, TotalPrice);
+            Assert.AreEqual(Error, "");
+
+        }
+        [TestMethod]
+        public void TotalPriceMinLessOne()
+        {
+            clsOrder AnOrder = new clsOrder();
+            String Error = "";
+            //a variable to store test date data
+            string TotalPrice = "-1.1";
+            //invoke method
+            Error = AnOrder.Valid(Quantity, OrderDate, DeliveryAddress, TotalPrice);
+            Assert.AreNotEqual(Error, "");
+
+        }
+        [TestMethod]
+        public void TotalPriceMinPlusOne()
+        {
+            clsOrder AnOrder = new clsOrder();
+            String Error = "";
+            //a variable to store test date data
+            string TotalPrice = "1";
+            //invoke method
+            Error = AnOrder.Valid(Quantity, OrderDate, DeliveryAddress, TotalPrice);
+            Assert.AreEqual(Error, "");
         }
     }
 }

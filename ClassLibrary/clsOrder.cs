@@ -45,6 +45,9 @@ namespace ClassLibrary
             String Error = "";
             // temp var for dates
             DateTime DateTemp;
+
+
+            // DeliveryAddress validate
             if (deliveryAddress.Length == 0)
             {
                 Error = Error + "The Delivery address may not be blank: ";
@@ -66,6 +69,18 @@ namespace ClassLibrary
 
             }
             catch { Error = Error + "The date is not a valid date: "; }
+
+            // Quantity validate
+            try
+            {
+                if (Convert.ToInt32(quantity) < 0) { Error = Error + "Quantity cannot be less than 0"; }
+            }
+            catch { Error = Error + "Not a valid Quantity"; }
+            // TotalPrice validate
+            try
+            {
+                if (Convert.ToDecimal(totalPrice) < 0) { Error = Error + "Total Price cannot be less than 0"; }
+            } catch { Error = Error + "Not a valid total price"; }
             return Error;
         }
     }
