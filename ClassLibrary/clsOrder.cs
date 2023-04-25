@@ -39,5 +39,34 @@ namespace ClassLibrary
             else { return false; }
 
         }
+
+        public string Valid(string quantity, string orderDate, string deliveryAddress, string totalPrice)
+        {
+            String Error = "";
+            // temp var for dates
+            DateTime DateTemp;
+            if (deliveryAddress.Length == 0)
+            {
+                Error = Error + "The Delivery address may not be blank: ";
+            }
+
+            // OrderDate validate
+            try
+            {
+                DateTemp = Convert.ToDateTime(orderDate);
+                if (DateTemp < DateTime.Now.Date)
+                {
+                    Error = Error + "The date cannot be in the past: ";
+                }
+                if (DateTemp > DateTime.Now.Date)
+                {
+                    //record the error
+                    Error = Error + "The date cannot be in the future : ";
+                }
+
+            }
+            catch { Error = Error + "The date is not a valid date: "; }
+            return Error;
+        }
     }
 }
