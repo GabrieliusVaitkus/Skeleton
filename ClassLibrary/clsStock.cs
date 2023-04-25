@@ -5,7 +5,7 @@ namespace ClassLibrary
     public class clsStock
     {
         private DateTime mDateAdded;
-        private decimal mCardPrice;
+        private decimal mPrice;
         private Boolean mAvailable;
         private string mCardType;
         private string mCardDescription;
@@ -22,15 +22,15 @@ namespace ClassLibrary
                 mAvailable = value;
             }
         }
-        public decimal CardPrice
+        public decimal Price
         {
             get
             {
-                return mCardPrice;
+                return mPrice;
             }
             set
             {
-                mCardPrice = value;
+                mPrice = value;
             }
         }
         public string CardType
@@ -82,16 +82,37 @@ namespace ClassLibrary
 
         public bool Find(int CardNo)
         {
-            mDateAdded = Convert.ToDateTime("16/9/2015");
-            mCardNo = 21;
-            mCardDescription = "Lightning";
-            mCardType = "Fire";
-            mCardPrice = Convert.ToDecimal(5.22);
-            mAvailable = true;
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("CardNo", CardNo);
+            DB.Execute("sproc_tblStock_FilterByCardNo");
+            if (DB.Count == 1)
+            {
+                mCardNo = Convert.ToInt32(DB.DataTable.Rows[0]["CardNo"]);
+                mCardDescription = Convert.ToString(DB.DataTable.Rows[0]["CardDescription"]);
+                mCardType = Convert.ToString(DB.DataTable.Rows[0]["CardType"]);
+                mPrice = Convert.ToDecimal(DB.DataTable.Rows[0]["Price"]);
+                mDateAdded = Convert.ToDateTime(DB.DataTable.Rows[0]["DateAdded"]);
+                mAvailable = Convert.ToBoolean(DB.DataTable.Rows[0]["Available"]);
 
-            //always return true;
-            return true;
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+
         }
+
+
+
+
+
+
+
+            
+
+
+
 
 
 
