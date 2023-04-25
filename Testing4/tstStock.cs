@@ -7,9 +7,9 @@ namespace Testing4
     [TestClass]
     public class tstStock
     {
-        string CardDescription = "Water";
-        string CardType = "Trainer";
-        decimal CardPrice = 9;
+        string CardDescription = "Psychic";
+        string CardType = "Energy";
+        decimal Price = Convert.ToDecimal(9.100);
         string DateAdded = DateTime.Now.Date.ToString();
 
         [TestMethod]
@@ -95,9 +95,9 @@ namespace Testing4
             //create some test data to assign to the Item
             decimal TestData = 975;
             //Assign the data to the item
-            AnStock.CardPrice = TestData;
+            AnStock.Price = TestData;
             //test to see that the two values are the same
-            Assert.AreEqual(AnStock.CardPrice, TestData);
+            Assert.AreEqual(AnStock.Price, TestData);
         }
 
         [TestMethod]
@@ -108,7 +108,7 @@ namespace Testing4
             //Bollean variable to store the results of the validation
             Boolean Found = false;
             //Create some test data to use with the method
-            Int32 CardNo = 21;
+            Int32 CardNo = 1006;
             //invoke the method
             Found = AnStock.Find(CardNo);
             //Test to see if the result is true
@@ -125,11 +125,11 @@ namespace Testing4
             //Bolean variable to record if data is OK (Assume it is)
             Boolean ok = true;
             //Create some test data to use with the method
-            Int32 CardNo = 21;
+            Int32 CardNo = 1006;
             //invoke the method
             Found = AnStock.Find(CardNo);
             //check the address no
-            if (AnStock.CardNo != 21)
+            if (AnStock.CardNo != 1006)
             {
                 ok = false;
             }
@@ -147,11 +147,11 @@ namespace Testing4
             //boolean variable to record if data is OK (assume it is)
             Boolean OK = true;
             //create some test data to use with the method
-            Int32 CardNo = 21;
+            Int32 CardNo = 1006;
             //invoke the method
             Found = AnStock.Find(CardNo);
             //check the property
-            if (AnStock.DateAdded != Convert.ToDateTime("16/09/2015"))
+            if (AnStock.DateAdded != Convert.ToDateTime("03/08/2020"))
             {
                 OK = false;
             }
@@ -169,7 +169,7 @@ namespace Testing4
             //boolean variable to record if data is OK (assume it is)
             Boolean OK = true;
             //create some test data to use with the method
-            Int32 CardNo = 21;
+            Int32 CardNo = 1006;
             //invoke the method
             Found = AnStock.Find(CardNo);
             //check the property
@@ -182,7 +182,7 @@ namespace Testing4
         }
 
         [TestMethod]
-        public void TestCardPriceFound()
+        public void TestPriceFound()
         {
             //create an instance of the class we want to create
             clsStock AnStock = new clsStock();
@@ -191,11 +191,11 @@ namespace Testing4
             //boolean variable to record if data is OK (assume it is)
             Boolean OK = true;
             //create some test data to use with the method
-            Int32 CardNo = 21;
+            Int32 CardNo = 1006;
             //invoke the method
             Found = AnStock.Find(CardNo);
             //check the property
-            if (AnStock.CardPrice != Convert.ToDecimal(5.22))
+            if (AnStock.Price != Convert.ToDecimal(9.100))
             {
                 OK = false;
             }
@@ -213,11 +213,11 @@ namespace Testing4
             //boolean variable to record if data is OK (assume it is)
             Boolean OK = true;
             //create some test data to use with the method
-            Int32 CardNo = 21;
+            Int32 CardNo = 1006;
             //invoke the method
             Found = AnStock.Find(CardNo);
             //check the property
-            if (AnStock.CardType != "Fire")
+            if (AnStock.CardType != "Energy")
             {
                 OK = false;
             }
@@ -235,11 +235,11 @@ namespace Testing4
             //boolean variable to record if data is OK (assume it is)
             Boolean OK = true;
             //create some test data to use with the method
-            Int32 CardNo = 21;
+            Int32 CardNo = 1006;
             //invoke the method
             Found = AnStock.Find(CardNo);
             //check the property
-            if (AnStock.CardDescription != "Lightning")
+            if (AnStock.CardDescription != "Psychic")
             {
                 OK = false;
             }
