@@ -109,7 +109,7 @@ namespace ClassLibrary
             clsDataConnection DB = new clsDataConnection();
 
             //Add the parameter for the staff no to search for
-            DB.addParameter("@staffNo", staffNo);
+            DB.AddParameter("@staffNo", staffNo);
 
             //execute the stored procedure
             DB.Execute("sproc_tblStaff_FilterByStaffNo");
