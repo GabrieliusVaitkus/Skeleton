@@ -21,7 +21,7 @@ namespace ClassLibrary
         public bool Find(int OrderNo)
         {
             clsDataConnection DB = new clsDataConnection();
-            DB.addParameter("@OrderNo", OrderNo);
+            DB.AddParameter("@OrderNo", OrderNo);
             DB.Execute("sproc_tblOrder_FilterByOrderNo");
             // if one record is found (will be one or zero)
             if (DB.Count == 1)
