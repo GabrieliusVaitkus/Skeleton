@@ -104,5 +104,87 @@ namespace Testing2
             }
             Assert.IsTrue(OK);
         }
+        [TestMethod]
+        public void TestOrderDateFound()
+        {
+            clsOrder AnOrder = new clsOrder();
+            // boolean variable to store the results of validation
+            Boolean Found = false;
+            // boolean if data is ok
+            Boolean OK = true;
+            Int32 OrderNo = 1;
+            Found = AnOrder.Find(OrderNo);
+            if (AnOrder.OrderDate != Convert.ToDateTime("31/01/2023"))
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
+        }
+        
+        [TestMethod]
+        public void TestDeliveryAddress()
+        {
+            clsOrder AnOrder = new clsOrder();
+            // boolean variable to store the results of validation
+            Boolean Found = false;
+            // boolean if data is ok
+            Boolean OK = true;
+            Int32 OrderNo = 1;
+            Found = AnOrder.Find(OrderNo);
+            if (AnOrder.DeliveryAddress != "96 alan road")
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
+        }
+        [TestMethod]
+        public void TestTotalPrice()
+        {
+            clsOrder AnOrder = new clsOrder();
+            // boolean variable to store the results of validation
+            Boolean Found = false;
+            // boolean if data is ok
+            Boolean OK = true;
+            Int32 OrderNo = 1;
+            Found = AnOrder.Find(OrderNo);
+            if (AnOrder.TotalPrice != Convert.ToDecimal(8.99))
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
+        }
+        [TestMethod]
+        public void TestQuantity()
+        {
+            clsOrder AnOrder = new clsOrder();
+            // boolean variable to store the results of validation
+            Boolean Found = false;
+            // boolean if data is ok
+            Boolean OK = true;
+            Int32 OrderNo = 1;
+            Found = AnOrder.Find(OrderNo);
+            if (AnOrder.Quantity != 5)
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
+        }
+        [TestMethod]
+        public void TestDelivered()
+        {
+            clsOrder AnOrder = new clsOrder();
+            // boolean variable to store the results of validation
+            Boolean Found = false;
+            // boolean if data is ok
+            Boolean OK = true;
+            Int32 OrderNo = 1;
+            Found = AnOrder.Find(OrderNo);
+            if (AnOrder.Delivered != true)
+            {
+                OK = false;
+            }
+            Assert.IsTrue(OK);
+        }
+        
     }
 }
