@@ -20,31 +20,6 @@ public partial class _1_DataEntry : System.Web.UI.Page
 
     protected void btnOK_Click(object sender, EventArgs e)
     {
-        clsCustomer ACustomer = new clsCustomer();
-        string FirstName = txtFirstName.Text;
-        string LastName = txtLastName.Text;
-        string Email = txtEmail.Text;
-        string PhoneNo = txtContactNumber.Text;
-        string DateAdded = txtDateAdded.Text;
-        string Error = "";
-        Error = ACustomer.Valid(LastName, Email, PhoneNo, DateAdded, FirstName);
-        if (Error == "")
-        {
-            ACustomer.FirstName = FirstName;
-            ACustomer.LastName = LastName;
-            ACustomer.Email = Email;
-            ACustomer.PhoneNo = PhoneNo;
-            ACustomer.DateAdded = Convert.ToDateTime(DateAdded);
-            Session["ACustomer"] = ACustomer;
-        }
-        else
-        {
-            lblError.Text = Error;
-        }
-    }
-
-    protected void btnFind_Click(object sender, EventArgs e)
-    {
         clsCustomer ACustomerNo = new clsCustomer();
         string FirstName = txtFirstName.Text;
         string LastName = txtLastName.Text;
@@ -65,7 +40,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
             clsCustomerCollection CustomerList = new clsCustomerCollection();
             CustomerList.ThisCustomer = ACustomerNo;
             CustomerList.Add();
-            Response.Redirect("CustomerList.aspx");       
+            Response.Redirect("CustomerList.aspx");
         }
         else
         {
@@ -73,8 +48,21 @@ public partial class _1_DataEntry : System.Web.UI.Page
         }
     }
 
-    protected void txtCPhoneNo_TextChanged(object sender, EventArgs e)
+    protected void btnFind_Click(object sender, EventArgs e)
     {
-
+        clsCustomer ACustomerNo = new clsCustomer();
+        Int32 CustomerNo;
+        Boolean Found = false;
+        CustomerNo = Convert.ToInt32(txtCustomerNo.Text);
+        Found = ACustomerNo.Find(CustomerNo);
+        if (Found == true)
+        {
+            txtFirstName.Text = ACustomerNo.FirstName;
+            txtLastName.Text = ACustomerNo.LastName;
+            txtEmail.Text = ACustomerNo.Email;
+            txtContactNumber.Text = ACustomerNo.PhoneNo;
+            txtDateAdded.Text = ACustomerNo.DateAdded.ToString();
+            chkActive.Checked = ACustomerNo.AccountActive;
+        }
     }
 }

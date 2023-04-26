@@ -94,8 +94,36 @@ namespace Testing1
             TestItem.CustomerNo = PrimaryKey;
             AllCustomers.ThisCustomer.Find(PrimaryKey);
             Assert.AreEqual(AllCustomers.ThisCustomer, TestItem);
-
         }
+        //[TestMethod]
+        //public void UpdateMethodOK()
+        //{
+        //    clsCustomerCollection AllCustomers = new clsCustomerCollection();
+        //    clsCustomer TestItem = new clsCustomer();
+        //    Int32 PrimaryKey = 0;
+        //    TestItem.AccountActive = true;
+        //    TestItem.CustomerNo = 1;
+        //    TestItem.DateAdded = DateTime.Now.Date;
+        //    TestItem.FirstName = "aa";
+        //    TestItem.LastName = "aa";
+        //    TestItem.PhoneNo = "1234";
+        //    TestItem.Email = "sdsds@dsds";
+        //    AllCustomers.ThisCustomer = TestItem;
+        //    PrimaryKey = AllCustomers.Add();
+        //    TestItem.CustomerNo = PrimaryKey;
+        //    TestItem.AccountActive = true;
+        //    TestItem.CustomerNo = 3;
+        //    TestItem.DateAdded = DateTime.Now.Date;
+        //    TestItem.FirstName = "bb";
+        //    TestItem.LastName = "bb";
+        //    TestItem.PhoneNo = "1456";
+        //    TestItem.Email = "abcd@ghji.com";
+        //    AllCustomers.ThisCustomer = TestItem;
+        //    AllCustomers.Update();
+        //    AllCustomers.ThisCustomer.Find(PrimaryKey);
+        //    Assert.AreEqual(AllCustomers.ThisCustomer, TestItem);
+
+        //}
     }
 }
 
