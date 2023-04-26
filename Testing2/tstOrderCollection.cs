@@ -44,7 +44,7 @@ namespace Testing2
         public void CountPropertyOK()
         {
             clsOrderCollection AllOrders = new clsOrderCollection();
-            Int32 SomeCount = 0;
+            Int32 SomeCount = 2;
             AllOrders.Count = SomeCount;
             Assert.AreEqual(AllOrders.Count, SomeCount);
         }
