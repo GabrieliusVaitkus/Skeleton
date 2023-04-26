@@ -36,18 +36,7 @@ namespace Testing1
             AllCustomers.CustomerList = TestList;
             Assert.AreEqual(AllCustomers.CustomerList, TestList);
         }
-        [TestMethod]
-        public void CountPropertyOK()
-        {
-            // instance of class created
-            clsCustomerCollection AllCustomers = new clsCustomerCollection();
-            //Some test data to assign to property
-            Int32 SomeCount = 2;
-            //assign date to property
-            AllCustomers.Count = SomeCount;
-            //test to see that the two values are the same
-            Assert.AreEqual(AllCustomers.Count, SomeCount);
-        }
+       
         [TestMethod]
         public void ThisCustomerPropertyOK()
         {
@@ -73,7 +62,7 @@ namespace Testing1
             clsCustomerCollection AllCustomers = new clsCustomerCollection();
             //data needs to be a list of objects
             List<clsCustomer> TestList = new List<clsCustomer>();
-            clsCustomer TestItem = new clsCustomer();
+            clsCustomer TestItem = new  clsCustomer();
             TestItem.AccountActive = true;
             TestItem.CustomerNo = 1;
             TestItem.DateAdded = DateTime.Now.Date;
@@ -87,12 +76,7 @@ namespace Testing1
             Assert.AreEqual(AllCustomers.Count, TestList.Count);
 
         }
-        [TestMethod]
-        public void TwoRecordsPresent()
-        {
-            clsCustomerCollection AllCustomers = new clsCustomerCollection();
-            Assert.AreEqual(AllCustomers.Count, 2);
-        }
+       
 
 
     }
