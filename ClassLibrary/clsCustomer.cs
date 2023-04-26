@@ -146,7 +146,7 @@ namespace ClassLibrary
             }
         }
         private string mPhoneNo;
-        public string ContactNumber
+        public string PhoneNo
         {
             get
             {

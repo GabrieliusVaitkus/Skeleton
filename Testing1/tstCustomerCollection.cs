@@ -29,7 +29,7 @@ namespace Testing1
             TestItem.DateAdded = DateTime.Now.Date;
             TestItem.FirstName = "aa";
             TestItem.LastName = "aa";
-            TestItem.ContactNumber = "1234";
+            TestItem.PhoneNo = "1234";
             TestItem.Email = "sdsds@dsds";
             //add the item to the test list
             TestList.Add(TestItem);
@@ -50,7 +50,7 @@ namespace Testing1
             TestCustomer.DateAdded = DateTime.Now.Date;
             TestCustomer.FirstName = "aa";
             TestCustomer.LastName = "aa";
-            TestCustomer.ContactNumber = "1234";
+            TestCustomer.PhoneNo = "1234";
             TestCustomer.Email = "sdsds@dsds";
             //assign the data to property
             AllCustomers.ThisCustomer = TestCustomer;
@@ -68,7 +68,7 @@ namespace Testing1
             TestItem.DateAdded = DateTime.Now.Date;
             TestItem.FirstName = "aa";
             TestItem.LastName = "aa";
-            TestItem.ContactNumber = "1234";
+            TestItem.PhoneNo = "1234";
             TestItem.Email = "sdsds@dsds";
             //add the item to the test list
             TestList.Add(TestItem);
@@ -76,9 +76,26 @@ namespace Testing1
             Assert.AreEqual(AllCustomers.Count, TestList.Count);
 
         }
-       
+        [TestMethod] 
+        public void AddMethodOK()
+        {
+            clsCustomerCollection AllCustomers = new clsCustomerCollection();
+            clsCustomer TestItem = new clsCustomer();
+            Int32 PrimaryKey = 0;
+            TestItem.AccountActive = true;
+            TestItem.CustomerNo = 1;
+            TestItem.DateAdded = DateTime.Now.Date;
+            TestItem.FirstName = "aa";
+            TestItem.LastName = "aa";
+            TestItem.PhoneNo = "1234";
+            TestItem.Email = "sdsds@dsds";
+            AllCustomers.ThisCustomer = TestItem;
+            PrimaryKey = AllCustomers.Add();
+            TestItem.CustomerNo = PrimaryKey;
+            AllCustomers.ThisCustomer.Find(PrimaryKey);
+            Assert.AreEqual(AllCustomers.ThisCustomer, TestItem);
 
-
+        }
     }
 }
 

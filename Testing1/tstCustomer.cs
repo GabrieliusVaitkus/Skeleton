@@ -84,8 +84,8 @@ namespace Testing1
         {
             clsCustomer ACustomer = new clsCustomer();
             string TestData = "2151254207";
-            ACustomer.ContactNumber = TestData;
-            Assert.AreEqual(ACustomer.ContactNumber, TestData);
+            ACustomer.PhoneNo = TestData;
+            Assert.AreEqual(ACustomer.PhoneNo, TestData);
         }
         [TestMethod]
         public void FindMethodOK()
@@ -200,7 +200,7 @@ namespace Testing1
             Boolean OK = true;
             Int32 CustomerNo = 1;
             Found = ACustomer.Find(CustomerNo);
-            if (ACustomer.ContactNumber != "1254789654") //PhoneNo property name didn't match what was in the Find Method was ContactNumber
+            if (ACustomer.PhoneNo != "1254789654") //PhoneNo property name didn't match what was in the Find Method was ContactNumber
             {
                 OK = false;
             }

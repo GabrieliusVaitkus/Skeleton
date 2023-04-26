@@ -8,6 +8,7 @@ namespace ClassLibrary
 
     {
         List<clsCustomer> mCustomerList = new List<clsCustomer>();
+        clsCustomer mThisCustomer = new clsCustomer();
 
         public clsCustomerCollection()
         {
@@ -26,7 +27,7 @@ namespace ClassLibrary
                 ACustomer.FirstName = Convert.ToString(DB.DataTable.Rows[Index]["FirstName"]);
                 ACustomer.LastName = Convert.ToString(DB.DataTable.Rows[Index]["LastName"]);
                 ACustomer.Email = Convert.ToString(DB.DataTable.Rows[Index]["Email"]);
-                ACustomer.ContactNumber = Convert.ToString(DB.DataTable.Rows[Index]["PhoneNo"]);
+                ACustomer.PhoneNo = Convert.ToString(DB.DataTable.Rows[Index]["PhoneNo"]);
                 ACustomer.DateAdded = Convert.ToDateTime(DB.DataTable.Rows[Index]["DateAdded"]);
                 mCustomerList.Add(ACustomer);
                 Index++;
@@ -62,28 +63,30 @@ namespace ClassLibrary
             }
         
         }
-        public clsCustomer ThisCustomer { get; set; }
-        //public clsCustomerCollection()
-        //{
-        //    clsCustomer TestItem = new clsCustomer();
-        //    TestItem.AccountActive = true;
-        //    TestItem.CustomerNo = 1;
-        //    TestItem.DateAdded = DateTime.Now.Date;
-        //    TestItem.FirstName = "aa";
-        //    TestItem.LastName = "aa";
-        //    TestItem.ContactNumber = "1234";
-        //    TestItem.Email = "sdsds@dsds";
-        //    mCustomerList.Add(TestItem);
-        //    TestItem = new clsCustomer();
-        //    TestItem.AccountActive = true;
-        //    TestItem.CustomerNo = 2;
-        //    TestItem.DateAdded = DateTime.Now.Date;
-        //    TestItem.FirstName = "bb";
-        //    TestItem.LastName = "bb";
-        //    TestItem.ContactNumber = "2345";
-        //    TestItem.Email = "asdf@gfd";
-        //    mCustomerList.Add(TestItem);
-        //}
+        public clsCustomer ThisCustomer
+        {
+        get
+            {
+                return mThisCustomer;
+            }
+            set
+            {
+                mThisCustomer = value;
+            }
+        }
+
+        public int Add()
+        {
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@DateAdded", mThisCustomer.DateAdded);
+            DB.AddParameter("@FirstName", mThisCustomer.FirstName);
+            DB.AddParameter("@LastName", mThisCustomer.LastName);
+            DB.AddParameter("@Email", mThisCustomer.Email);
+            DB.AddParameter("@PhoneNo", mThisCustomer.PhoneNo);
+            DB.AddParameter("AccountActive", mThisCustomer.AccountActive);
+            return DB.Execute("sproc_tblCustomer_Insert");
+        }
+       
     }
 
 }
