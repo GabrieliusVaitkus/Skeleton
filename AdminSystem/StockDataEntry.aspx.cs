@@ -27,17 +27,32 @@ public partial class _1_DataEntry : System.Web.UI.Page
     {
         //create a new instance of clsStock
         clsStock AnStock = new clsStock();
-        //capture the stock no
-        AnStock.CardNo = Convert.ToInt32(txtCardNo.Text);
-        
+        string CardDescription = txtCardDescription.Text;
+        string Price = txtPrice.Text;
+        string CardType = txtCardType.Text;
+        string DateAdded = txtDateAdded.Text;
 
+        string Error = "";
+        Error = AnStock.Valid(Price, CardDescription, CardType, DateAdded);
 
+        if (Error == "")
+        {
+            AnStock.CardNo = Convert.ToInt32(txtCardNo.Text); ;
+            AnStock.CardDescription = CardDescription;
+            AnStock.CardType = CardType;
+            AnStock.Price = Convert.ToDecimal(Price);
+            AnStock.DateAdded = Convert.ToDateTime(DateAdded);
 
-        //store the stock in the session object
-        Session["AnStock"] = AnStock;
-        //navigate to the viewer page
-        Response.Redirect("StockViewer.aspx");
+            Session["AnStock"] = AnStock;
+            Response.Write("StockViewer.aspx");
+        }
+
+        else
+        {
+            lblError.Text = Error;
+        }
     }
+    
 
 
     protected void txtCardNo_TextChanged(object sender, EventArgs e)

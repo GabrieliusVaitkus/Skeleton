@@ -113,13 +113,13 @@ namespace ClassLibrary
             if (Price.Length == 0)
             {
                 //record the error
-                Error = Error + "The house no may not be blank : ";
+                Error = Error + "The Price may not be blank : ";
             }
             //if the house no is greater than 6 characters
             if (Price.Length > 6)
             {
                 //record the error
-                Error = Error + "The house no must be less than 6 characters : ";
+                Error = Error + "The Price must be less than 6 characters : ";
             }
             try
             {
@@ -149,25 +149,25 @@ namespace ClassLibrary
             if (CardDescription.Length == 0)
             {
                 //record the error
-                Error = Error + "The street may not be blank : ";
+                Error = Error + "The Card Description may not be blank : ";
             }
             //if the street is too long
             if (CardDescription.Length > 50)
             {
                 //record the error
-                Error = Error + "The street must be less than 50 characters : ";
+                Error = Error + "The Card Description must be less than 50 characters : ";
             }
             //is the town blank
             if (CardType.Length == 0)
             {
                 //record the error
-                Error = Error + "The town may not be blank : ";
+                Error = Error + "The Card Type may not be blank : ";
             }
             //if the town is too long
             if (CardType.Length > 50)
             {
                 //record the error
-                Error = Error + "The town must be less than 50 characters : ";
+                Error = Error + "The Card Type must be less than 50 characters : ";
             }
             //return any error messages
             return Error;
