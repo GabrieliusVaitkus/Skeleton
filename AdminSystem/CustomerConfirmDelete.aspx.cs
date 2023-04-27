@@ -12,7 +12,7 @@ public partial class _1_ConfirmDelete : System.Web.UI.Page
     protected void Page_Load(object sender, EventArgs e)
     {
         CustomerNo = Convert.ToInt32(Session["CustomerNo"]);
-
+        //test
     }
 
     protected void btnNo_Click(object sender, EventArgs e)
