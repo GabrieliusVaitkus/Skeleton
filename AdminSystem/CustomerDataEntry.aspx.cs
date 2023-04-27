@@ -7,16 +7,21 @@ using System.Web.UI.WebControls;
 using ClassLibrary;
 
 public partial class _1_DataEntry : System.Web.UI.Page
+
 {
+    Int32 CustomerNo;
     protected void Page_Load(object sender, EventArgs e)
     {
-
+        CustomerNo = Convert.ToInt32(Session["CustomerNo"]);
+        if (IsPostBack == false)
+        {
+            if (CustomerNo != -1)
+            {
+                DisplayCustomer();
+            }
+        }
     }
 
-    protected void TextBox1_TextChanged(object sender, EventArgs e)
-    {
-
-    }
 
     protected void btnOK_Click(object sender, EventArgs e)
     {
@@ -31,6 +36,7 @@ public partial class _1_DataEntry : System.Web.UI.Page
         if (Error == "")
 
         {
+            ACustomerNo.CustomerNo = CustomerNo;
             ACustomerNo.FirstName = FirstName;
             ACustomerNo.LastName = LastName;
             ACustomerNo.Email = Email;
@@ -38,8 +44,20 @@ public partial class _1_DataEntry : System.Web.UI.Page
             ACustomerNo.DateAdded = Convert.ToDateTime(DateAdded);
             ACustomerNo.AccountActive = chkActive.Checked;
             clsCustomerCollection CustomerList = new clsCustomerCollection();
-            CustomerList.ThisCustomer = ACustomerNo;
-            CustomerList.Add();
+            //CustomerList.ThisCustomer = ACustomerNo;
+            //CustomerList.Add();
+            //Response.Redirect("CustomerList.aspx");
+            if (CustomerNo == -1)
+            {
+                CustomerList.ThisCustomer = ACustomerNo;
+                CustomerList.Add();
+            }
+            else
+            {
+                CustomerList.ThisCustomer.Find(CustomerNo);
+                CustomerList.ThisCustomer = ACustomerNo;
+                CustomerList.Update();
+            }
             Response.Redirect("CustomerList.aspx");
         }
         else
@@ -65,4 +83,21 @@ public partial class _1_DataEntry : System.Web.UI.Page
             chkActive.Checked = ACustomerNo.AccountActive;
         }
     }
+    void DisplayCustomer()
+    {
+        clsCustomerCollection CustomerBook = new clsCustomerCollection();
+        CustomerBook.ThisCustomer.Find(CustomerNo);
+        txtCustomerNo.Text = CustomerBook.ThisCustomer.CustomerNo.ToString();
+        txtFirstName.Text = CustomerBook.ThisCustomer.FirstName;
+        txtLastName.Text = CustomerBook.ThisCustomer.LastName;
+        txtEmail.Text = CustomerBook.ThisCustomer.Email;
+        txtContactNumber.Text = CustomerBook.ThisCustomer.PhoneNo;
+        txtDateAdded.Text = CustomerBook.ThisCustomer.DateAdded.ToString();
+        chkActive.Checked = CustomerBook.ThisCustomer.AccountActive;
+    }
+
+
+
+
+
 }

@@ -1,6 +1,6 @@
-﻿using ClassLibrary;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
+﻿using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System;
+using ClassLibrary;
 using System.Collections.Generic;
 
 namespace Testing1
@@ -36,7 +36,7 @@ namespace Testing1
             AllCustomers.CustomerList = TestList;
             Assert.AreEqual(AllCustomers.CustomerList, TestList);
         }
-       
+
         [TestMethod]
         public void ThisCustomerPropertyOK()
         {
@@ -62,7 +62,7 @@ namespace Testing1
             clsCustomerCollection AllCustomers = new clsCustomerCollection();
             //data needs to be a list of objects
             List<clsCustomer> TestList = new List<clsCustomer>();
-            clsCustomer TestItem = new  clsCustomer();
+            clsCustomer TestItem = new clsCustomer();
             TestItem.AccountActive = true;
             TestItem.CustomerNo = 1;
             TestItem.DateAdded = DateTime.Now.Date;
@@ -76,7 +76,7 @@ namespace Testing1
             Assert.AreEqual(AllCustomers.Count, TestList.Count);
 
         }
-        [TestMethod] 
+        [TestMethod]
         public void AddMethodOK()
         {
             clsCustomerCollection AllCustomers = new clsCustomerCollection();
@@ -95,35 +95,71 @@ namespace Testing1
             AllCustomers.ThisCustomer.Find(PrimaryKey);
             Assert.AreEqual(AllCustomers.ThisCustomer, TestItem);
         }
-        //[TestMethod]
-        //public void UpdateMethodOK()
-        //{
-        //    clsCustomerCollection AllCustomers = new clsCustomerCollection();
-        //    clsCustomer TestItem = new clsCustomer();
-        //    Int32 PrimaryKey = 0;
-        //    TestItem.AccountActive = true;
-        //    TestItem.CustomerNo = 1;
-        //    TestItem.DateAdded = DateTime.Now.Date;
-        //    TestItem.FirstName = "aa";
-        //    TestItem.LastName = "aa";
-        //    TestItem.PhoneNo = "1234";
-        //    TestItem.Email = "sdsds@dsds";
-        //    AllCustomers.ThisCustomer = TestItem;
-        //    PrimaryKey = AllCustomers.Add();
-        //    TestItem.CustomerNo = PrimaryKey;
-        //    TestItem.AccountActive = true;
-        //    TestItem.CustomerNo = 3;
-        //    TestItem.DateAdded = DateTime.Now.Date;
-        //    TestItem.FirstName = "bb";
-        //    TestItem.LastName = "bb";
-        //    TestItem.PhoneNo = "1456";
-        //    TestItem.Email = "abcd@ghji.com";
-        //    AllCustomers.ThisCustomer = TestItem;
-        //    AllCustomers.Update();
-        //    AllCustomers.ThisCustomer.Find(PrimaryKey);
-        //    Assert.AreEqual(AllCustomers.ThisCustomer, TestItem);
 
-        //}
+
+        [TestMethod]
+        public void DeleteMethodOK()
+        {
+            clsCustomerCollection AllCustomers = new clsCustomerCollection();
+            clsCustomer TestItem = new clsCustomer();
+            Int32 PrimaryKey = 0;
+            TestItem.AccountActive = true;
+            TestItem.CustomerNo = 1;
+            TestItem.DateAdded = DateTime.Now.Date;
+            TestItem.FirstName = "aa";
+            TestItem.LastName = "aa";
+            TestItem.PhoneNo = "1234";
+            TestItem.Email = "sdsds@dsds";
+            AllCustomers.ThisCustomer = TestItem;
+            PrimaryKey = AllCustomers.Add();
+            TestItem.CustomerNo = PrimaryKey;
+            AllCustomers.ThisCustomer.Find(PrimaryKey);
+            AllCustomers.Delete();
+            Boolean Found = AllCustomers.ThisCustomer.Find(PrimaryKey);
+            Assert.IsFalse(Found);
+
+
+        }
+        [TestMethod]
+        public void ReportbyFirstNameMethodOK()
+        {
+            clsCustomerCollection AllCustomers = new clsCustomerCollection();
+            clsCustomerCollection FilteredCustomers = new clsCustomerCollection();
+            FilteredCustomers.ReportByFirstName("");
+            Assert.AreEqual(AllCustomers.Count, FilteredCustomers.Count);
+        }
+        [TestMethod]
+        public void ReportByFirstNameNoneFound()
+        {
+            clsCustomerCollection FilteredCustoners = new clsCustomerCollection();
+            FilteredCustoners.ReportByFirstName("ccc c");
+            Assert.AreEqual(0, FilteredCustoners.Count);
+
+        }
+        [TestMethod]
+        public void ReportByFirstNameTestDataFound()
+        {
+            clsCustomerCollection FilteredCustomers = new clsCustomerCollection();
+            Boolean OK = true;
+            FilteredCustomers.ReportByFirstName("yyy");
+            if (FilteredCustomers.Count == 2)
+            {
+                if (FilteredCustomers.CustomerList[0].CustomerNo != 50)
+                {
+                    OK = false;
+                }
+                if (FilteredCustomers.CustomerList[1].CustomerNo != 51)
+                {
+                    OK = false;
+                }
+            }
+            else
+            {
+                OK = false;
+            }
+            Assert.IsFalse(OK);
+        }
     }
 }
+
 
