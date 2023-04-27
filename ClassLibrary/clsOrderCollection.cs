@@ -9,27 +9,24 @@ namespace ClassLibrary
         List<clsOrder> mOrderList = new List<clsOrder>();
         public clsOrderCollection()
         {
-            clsOrder TestItem = new clsOrder();
-            //set the properties
-            TestItem.OrderNo = 1;
-            TestItem.Delivered = true;
-            TestItem.OrderDate = DateTime.Now.Date;
-            TestItem.DeliveryAddress = "aa";
-            TestItem.TotalPrice = new decimal(8.2);
-            TestItem.Quantity = 5;
-            mOrderList.Add(TestItem);
+            Int32 Index = 0;
+            Int32 RecordCount = 0;
+            clsDataConnection DB = new clsDataConnection();
+            DB.Execute("sproc_tblOrder_SelectAll");
+            RecordCount = DB.Count;
+            while (Index < RecordCount)
+            {
+                clsOrder AnOrder = new clsOrder();
+                AnOrder.OrderNo = Convert.ToInt32(DB.DataTable.Rows[Index]["OrderNo"]);
+                AnOrder.OrderDate = Convert.ToDateTime(DB.DataTable.Rows[Index]["OrderDate"]);
+                AnOrder.DeliveryAddress = Convert.ToString(DB.DataTable.Rows[Index]["DeliveryAddress"]);
+                AnOrder.TotalPrice = Convert.ToDecimal(DB.DataTable.Rows[Index]["TotalPrice"]);
+                AnOrder.Quantity = Convert.ToInt32(DB.DataTable.Rows[Index]["Quantity"]);
+                AnOrder.Delivered = Convert.ToBoolean(DB.DataTable.Rows[Index]["Delivered"]);
 
-            // re initialise object for some new data
-            TestItem = new clsOrder();
-
-            //set the properties
-            TestItem.OrderNo = 2;
-            TestItem.Delivered = true;
-            TestItem.OrderDate = DateTime.Now.Date;
-            TestItem.DeliveryAddress = "aa";
-            TestItem.TotalPrice = new decimal(9.8);
-            TestItem.Quantity = 7;
-            mOrderList.Add(TestItem);
+                mOrderList.Add(AnOrder);
+                Index++;
+            }
         }
 
         public List<clsOrder> OrderList { get { return mOrderList; } set { mOrderList = value; } }

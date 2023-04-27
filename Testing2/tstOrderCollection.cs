@@ -41,15 +41,6 @@ namespace Testing2
         }
 
         [TestMethod]
-        public void CountPropertyOK()
-        {
-            clsOrderCollection AllOrders = new clsOrderCollection();
-            Int32 SomeCount = 2;
-            AllOrders.Count = SomeCount;
-            Assert.AreEqual(AllOrders.Count, SomeCount);
-        }
-
-        [TestMethod]
         public void ThisOrderPropertyOK()
         {
             //instance of class being created
@@ -86,12 +77,6 @@ namespace Testing2
             AllOrders.OrderList = TestList;
             Assert.AreEqual(AllOrders.Count, TestList.Count);
 
-        }
-        [TestMethod]
-        public void TwoRecordsPresent()
-        {
-            clsOrderCollection AllOrders = new clsOrderCollection();
-            Assert.AreEqual(AllOrders.Count, 2);
         }
     }
 }
