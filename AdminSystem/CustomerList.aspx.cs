@@ -57,7 +57,7 @@ public partial class _1_List : System.Web.UI.Page
         if (lstCustomerList.SelectedIndex != 1)
         {
             CustomerNo = Convert.ToInt32(lstCustomerList.SelectedValue);
-            Session["CustoemrNo"] = CustomerNo;
+            Session["CustomerNo"] = CustomerNo;
             Response.Redirect("CustomerConfirmDelete.aspx");
 
         }

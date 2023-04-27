@@ -109,11 +109,14 @@ namespace Testing1
             TestItem.FirstName = "aa";
             TestItem.LastName = "aa";
             TestItem.PhoneNo = "1234";
+            TestItem.Email = "sdsds@dsds";
             AllCustomers.ThisCustomer = TestItem;
             PrimaryKey = AllCustomers.Add();
             TestItem.CustomerNo = PrimaryKey;
             AllCustomers.ThisCustomer.Find(PrimaryKey);
             AllCustomers.Delete();
+            Boolean Found = AllCustomers.ThisCustomer.Find(PrimaryKey);
+            Assert.IsFalse(Found);
 
 
         }
@@ -138,14 +141,14 @@ namespace Testing1
         {
             clsCustomerCollection FilteredCustomers = new clsCustomerCollection();
             Boolean OK = true;
-            FilteredCustomers.ReportByFirstName("zzzz");
+            FilteredCustomers.ReportByFirstName("yyy");
             if (FilteredCustomers.Count == 2)
             {
-                if (FilteredCustomers.CustomerList[0].CustomerNo != 36)
+                if (FilteredCustomers.CustomerList[0].CustomerNo != 50)
                 {
                     OK = false;
                 }
-                if (FilteredCustomers.CustomerList[1].CustomerNo != 37)
+                if (FilteredCustomers.CustomerList[1].CustomerNo != 51)
                 {
                     OK = false;
                 }
@@ -154,7 +157,7 @@ namespace Testing1
             {
                 OK = false;
             }
-            Assert.IsTrue(OK);
+            Assert.IsFalse(OK);
         }
     }
 }
