@@ -76,7 +76,27 @@ namespace Testing4
             Assert.AreEqual(AllStocks.Count, TestList.Count);
         }
 
-        
+        [TestMethod]
+        public void AddMethodOK()
+        {
+            //Create an instance of the class we want to create
+            clsStockCollection AllStocks = new clsStockCollection();
+            clsStock TestItem = new clsStock();
+            Int32 PrimaryKey = 0;
+            TestItem.Available = true;
+            TestItem.CardNo = 1;
+            TestItem.CardDescription = "Psychic";
+            TestItem.CardType = "Energy";
+            TestItem.Price = Convert.ToDecimal(9.100);
+            TestItem.DateAdded = DateTime.Now.Date;
+            AllStocks.ThisStock = TestItem;
+            PrimaryKey = AllStocks.Add();
+            TestItem.CardNo = PrimaryKey;
+            AllStocks.ThisStock.Find(PrimaryKey);
+            Assert.AreEqual(AllStocks.ThisStock, TestItem);
+        }
+
+
 
 
 
