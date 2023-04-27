@@ -58,5 +58,13 @@ namespace ClassLibrary
             DB.AddParameter("@Delivered", mThisOrder.Delivered);
             DB.Execute("sproc_tblOrder_Update");
         }
+
+        public void Delete()
+        {
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@OrderNo", mThisOrder.OrderNo);
+            DB.Execute("sproc_tblOrder_Delete");
+            
+        }
     }
 }
