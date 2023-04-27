@@ -12,24 +12,9 @@ namespace ClassLibrary
 
         public clsOrderCollection()
         {
-            Int32 Index = 0;
-            Int32 RecordCount = 0;
             clsDataConnection DB = new clsDataConnection();
             DB.Execute("sproc_tblOrder_SelectAll");
-            RecordCount = DB.Count;
-            while (Index < RecordCount)
-            {
-                clsOrder AnOrder = new clsOrder();
-                AnOrder.OrderNo = Convert.ToInt32(DB.DataTable.Rows[Index]["OrderNo"]);
-                AnOrder.OrderDate = Convert.ToDateTime(DB.DataTable.Rows[Index]["OrderDate"]);
-                AnOrder.DeliveryAddress = Convert.ToString(DB.DataTable.Rows[Index]["DeliveryAddress"]);
-                AnOrder.TotalPrice = Convert.ToDecimal(DB.DataTable.Rows[Index]["TotalPrice"]);
-                AnOrder.Quantity = Convert.ToInt32(DB.DataTable.Rows[Index]["Quantity"]);
-                AnOrder.Delivered = Convert.ToBoolean(DB.DataTable.Rows[Index]["Delivered"]);
-
-                mOrderList.Add(AnOrder);
-                Index++;
-            }
+            PopulateArray(DB);
         }
 
         public List<clsOrder> OrderList { get { return mOrderList; } set { mOrderList = value; } }
@@ -65,6 +50,36 @@ namespace ClassLibrary
             DB.AddParameter("@OrderNo", mThisOrder.OrderNo);
             DB.Execute("sproc_tblOrder_Delete");
             
+        }
+
+        public void ReportByDeliveryAddress(string DeliveryAddress)
+        {
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@DeliveryAddress", DeliveryAddress);
+            DB.Execute("sproc_tblOrder_FilterByDeliveryAddress");
+            PopulateArray(DB);
+        }
+
+        void PopulateArray(clsDataConnection DB)
+        {
+            Int32 Index = 0;
+            Int32 RecordCount;
+            RecordCount = DB.Count;
+            mOrderList = new List<clsOrder>();
+            while (Index < RecordCount)
+            {
+                clsOrder AnOrder = new clsOrder();
+                AnOrder.OrderDate = Convert.ToDateTime(DB.DataTable.Rows[Index]["OrderDate"]);
+                AnOrder.DeliveryAddress = Convert.ToString(DB.DataTable.Rows[Index]["DeliveryAddress"]);
+                AnOrder.TotalPrice = Convert.ToDecimal(DB.DataTable.Rows[Index]["TotalPrice"]);
+                AnOrder.Quantity = Convert.ToInt32(DB.DataTable.Rows[Index]["Quantity"]);
+                AnOrder.Delivered = Convert.ToBoolean(DB.DataTable.Rows[Index]["Delivered"]);
+
+                mOrderList.Add(AnOrder);
+                Index++;
+
+            }
+
         }
     }
 }

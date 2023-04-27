@@ -62,4 +62,26 @@ public partial class _1_List : System.Web.UI.Page
         }
         else { lblError.Text = "Please select a record to delete from the list"; }
     }
+
+    protected void btnApply_Click(object sender, EventArgs e)
+    {
+        clsOrderCollection Orders = new clsOrderCollection();
+        Orders.ReportByDeliveryAddress(txtFilter.Text);
+        lstOrderList.DataSource = Orders.OrderList;
+        lstOrderList.DataValueField = "OrderNo";
+        lstOrderList.DataTextField = "DeliveryAddress";
+        lstOrderList.DataBind();
+    }
+
+    protected void btnClear_Click(object sender, EventArgs e)
+    {
+        clsOrderCollection Orders = new clsOrderCollection();
+        Orders.ReportByDeliveryAddress("");
+        txtFilter.Text = "";
+        lstOrderList.DataSource = Orders.OrderList;
+        lstOrderList.DataValueField = "OrderNo";
+        lstOrderList.DataTextField = "DeliveryAddress";
+        lstOrderList.DataBind();
+
+    }
 }

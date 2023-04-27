@@ -152,5 +152,47 @@ namespace Testing2
             Assert.IsFalse(Found);
 
         }
+
+        [TestMethod]
+        public void ReportByDeliveryAddressMethodOK()
+        {
+            clsOrderCollection AllOrders = new clsOrderCollection();
+            clsOrderCollection FilteredOrders = new clsOrderCollection();
+            // applies a blank string so returns all records
+            FilteredOrders.ReportByDeliveryAddress("");
+            Assert.AreEqual(AllOrders.Count, FilteredOrders.Count);
+        }
+
+        [TestMethod]
+        public void ReportByDeliveryAddressNoneFound()
+        {
+            clsOrderCollection FilteredOrders = new clsOrderCollection();
+            FilteredOrders.ReportByDeliveryAddress("xxx xxx I do not exist");
+            Assert.AreEqual(0, FilteredOrders.Count);
+        }
+        [TestMethod]
+        public void ReportByDeliveryAddressMethodTestDataFound()
+        {
+            clsOrderCollection FilteredOrders = new clsOrderCollection();
+            Boolean OK = true;
+            FilteredOrders.ReportByDeliveryAddress("xlkjadslkfjldkjlkj");
+            if (FilteredOrders.Count == 2)
+            {
+                if (FilteredOrders.OrderList[0].OrderNo != 0)
+                {
+                    OK = false;
+                }
+                if (FilteredOrders.OrderList[1].OrderNo != 1)
+                {
+                    OK = false;
+                }
+            }
+            else { 
+                OK = false;
+            }
+            Assert.IsFalse(OK);
+
+        }
+
     }
 }
