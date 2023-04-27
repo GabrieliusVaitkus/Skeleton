@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 
 namespace ClassLibrary
 {
@@ -78,7 +79,7 @@ namespace ClassLibrary
             }
         }
 
-
+        public List<clsStock> StockList { get; set; }
 
         public bool Find(int CardNo)
         {
