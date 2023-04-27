@@ -45,8 +45,18 @@ namespace ClassLibrary
             DB.AddParameter("@Quantity", mThisOrder.Quantity);
             DB.AddParameter("@Delivered", mThisOrder.Delivered);
             return DB.Execute("sproc_tblOrder_Insert");
+        }
 
-
+        public void Update()
+        {
+            clsDataConnection DB = new clsDataConnection();
+            DB.AddParameter("@OrderNo", mThisOrder.OrderNo);
+            DB.AddParameter("@OrderDate", mThisOrder.OrderDate);
+            DB.AddParameter("@DeliveryAddress", mThisOrder.DeliveryAddress);
+            DB.AddParameter("@TotalPrice", mThisOrder.TotalPrice);
+            DB.AddParameter("@Quantity", mThisOrder.Quantity);
+            DB.AddParameter("@Delivered", mThisOrder.Delivered);
+            DB.Execute("sproc_tblOrder_Update");
         }
     }
 }

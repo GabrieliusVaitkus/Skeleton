@@ -8,8 +8,36 @@ using ClassLibrary;
 
 public partial class _1_DataEntry : System.Web.UI.Page
 {
+
+    Int32 OrderNo;
     protected void Page_Load(object sender, EventArgs e)
     {
+        // get the number of orders to be processed
+        OrderNo = Convert.ToInt32(Session["OrderNo"]);
+        if (IsPostBack == false)
+        {
+            // if it is not a new record
+            if (OrderNo != -1)
+            {
+                DisplayOrder();
+            }
+        }
+
+    }
+
+    void DisplayOrder()
+    {
+        clsOrderCollection Orders = new clsOrderCollection();
+        // find the record to update
+        Orders.ThisOrder.Find(OrderNo);
+
+        // displays the data for this record
+        txtOrderNo.Text = Orders.ThisOrder.OrderNo.ToString();
+        txtQuantity.Text = Orders.ThisOrder.Quantity.ToString();
+        txtDeliveryAddress.Text = Orders.ThisOrder.DeliveryAddress;
+        txtTotalPrice.Text = Orders.ThisOrder.TotalPrice.ToString();
+        txtOrderDate.Text = Orders.ThisOrder.OrderDate.ToString();
+        chkDelivered.Checked = Orders.ThisOrder.Delivered;
 
     }
 
@@ -28,12 +56,6 @@ public partial class _1_DataEntry : System.Web.UI.Page
         Error = AnOrder.Valid(Quantity, OrderDate, DeliveryAddress, TotalPrice);
         if (Error == "")
         {
-            //AnOrder.Quantity = Quantity;
-            //AnOrder.OrderDate = OrderDate;
-            //AnOrder.DeliveryAddress = DeliveryAddress;
-            //AnOrder.TotalPrice = TotalPrice;
-            // capture the input data
-
             AnOrder.OrderNo = Convert.ToInt32(txtOrderNo.Text);
             AnOrder.Quantity = Convert.ToInt32(txtQuantity.Text);
             AnOrder.DeliveryAddress = txtDeliveryAddress.Text;
@@ -41,9 +63,19 @@ public partial class _1_DataEntry : System.Web.UI.Page
             AnOrder.Delivered = chkDelivered.Checked;
             AnOrder.TotalPrice = (decimal)Convert.ToDouble(txtTotalPrice.Text);
             clsOrderCollection OrderList = new clsOrderCollection();
-            OrderList.ThisOrder = AnOrder;
-            OrderList.Add();
 
+
+            if (OrderNo == -1)
+            {
+                OrderList.ThisOrder = AnOrder;
+                OrderList.Add();
+            }
+            else
+            {
+                OrderList.ThisOrder.Find(OrderNo);
+                OrderList.ThisOrder = AnOrder;
+                OrderList.Update();
+            }
             //naviage to the viewer page
             Response.Redirect("OrdersList.aspx");
         }
@@ -77,4 +109,3 @@ public partial class _1_DataEntry : System.Web.UI.Page
         }
     }
 }
-

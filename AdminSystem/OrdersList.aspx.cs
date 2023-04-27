@@ -33,4 +33,21 @@ public partial class _1_List : System.Web.UI.Page
         Session["OrderNo"] = -1;
         Response.Redirect("OrdersDataEntry.aspx");
     }
+
+    protected void btnEdit_Click(object sender, EventArgs e)
+    {
+        Int32 OrderNo;
+        // if a record has been selected from the list
+        if (lstOrderList.SelectedIndex != -1)
+        {
+            OrderNo = Convert.ToInt32(lstOrderList.SelectedValue);
+            Session["OrderNo"] = OrderNo;
+            //redirects to the edit page
+            Response.Redirect("OrdersDataEntry.aspx");
+        }
+        else // if no record has been selected
+        {
+            lblError.Text = "Please select a record to edit from the list";
+        }
+    }
 }
