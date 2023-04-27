@@ -19,7 +19,7 @@
             <asp:TextBox ID="txtFirstName" runat="server"></asp:TextBox>
         </p>
         <asp:Label ID="lblLastName" runat="server" Text="Last Name"></asp:Label>
-        <asp:TextBox ID="txtLastName" runat="server" OnTextChanged="TextBox1_TextChanged"></asp:TextBox>
+        <asp:TextBox ID="txtLastName"  runat="server"></asp:TextBox>
         <p>
             <asp:Label ID="lblEmail" runat="server" Text="Email Adress"></asp:Label>
 &nbsp;
@@ -27,7 +27,7 @@
         </p>
         <asp:Label ID="lblContactNumber" runat="server" Text="Contact Number"></asp:Label>
 &nbsp;&nbsp;
-        <asp:TextBox ID="txtContactNumber" runat="server" OnTextChanged="txtCPhoneNo_TextChanged"></asp:TextBox>
+        <asp:TextBox ID="txtContactNumber" runat="server" ></asp:TextBox>
         <p>
             <asp:Label ID="lblDateAdded" runat="server" Text="Date Added"></asp:Label>
 &nbsp;
