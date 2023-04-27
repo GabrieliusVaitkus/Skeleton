@@ -40,11 +40,12 @@ public partial class _1_DataEntry : System.Web.UI.Page
             AnOrder.OrderDate = Convert.ToDateTime(txtOrderDate.Text);
             AnOrder.Delivered = chkDelivered.Checked;
             AnOrder.TotalPrice = (decimal)Convert.ToDouble(txtTotalPrice.Text);
+            clsOrderCollection OrderList = new clsOrderCollection();
+            OrderList.ThisOrder = AnOrder;
+            OrderList.Add();
 
-            // store the delivery address in the session object
-            Session["AnOrder"] = AnOrder;
             //naviage to the viewer page
-            Response.Redirect("OrdersViewer.aspx");
+            Response.Redirect("OrdersList.aspx");
         }
         else
         {
