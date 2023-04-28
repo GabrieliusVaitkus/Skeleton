@@ -112,6 +112,7 @@ namespace ClassLibrary
                 msupplierEmail = Convert.ToString(DB.DataTable.Rows[0]["supplierEmail"]);
                 msupplierAddress = Convert.ToString(DB.DataTable.Rows[0]["supplierAddress"]);
                 mdateRegistered = Convert.ToDateTime(DB.DataTable.Rows[0]["dateRegistered"]);
+                mactive = Convert.ToBoolean(DB.DataTable.Rows[0]["active"]);
 
                 //always return true
                 return true;

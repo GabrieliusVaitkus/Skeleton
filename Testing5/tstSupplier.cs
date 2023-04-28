@@ -190,7 +190,7 @@ namespace Testing5
             {
                 OK = false;
             }
-            Assert.IsFalse(OK);
+            Assert.IsTrue(OK);
         }
 
         [TestMethod]
