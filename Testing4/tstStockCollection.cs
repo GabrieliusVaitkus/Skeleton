@@ -41,7 +41,7 @@ namespace Testing4
        
 
         [TestMethod]
-        public void ThisStockProprtyOK()
+        public void ThisStockPropertyOK()
         {
             //Create an instance of the class we want to create
             clsStockCollection AllStocks = new clsStockCollection();
@@ -156,7 +156,45 @@ namespace Testing4
             Assert.AreEqual(0, FilteredStocks.Count);
         }
 
+        [TestMethod]
+        public void ReportByCardTypeFound()
+        {
+            clsStockCollection FilteredStock = new clsStockCollection();
+            FilteredStock.ReportByCardType("xxxxx");
+            Assert.AreEqual(0, FilteredStock.Count);
+        }
 
+        [TestMethod]
+        public void ReportByCardTypeTestDataFound()
+        {
+            clsStockCollection FilteredStock = new clsStockCollection();
+            Boolean OK = true;
+            FilteredStock.ReportByCardType("Pokemon");
+            if (FilteredStock.Count == 2)
+            {
+                if (FilteredStock.StockList[0].CardNo != 27)
+                {
+                    OK = false;
+                }
 
+                if (FilteredStock.StockList[1].CardNo != 28)
+                {
+                    OK = false;
+                }
+            }
+
+            else
+            {
+                OK = false;
+            }
+
+            Assert.IsFalse(OK);
+        }
     }
 }
+
+
+
+
+    
+
