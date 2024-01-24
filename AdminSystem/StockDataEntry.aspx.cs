@@ -8,8 +8,32 @@ using ClassLibrary;
 
 public partial class _1_DataEntry : System.Web.UI.Page
 {
+    Int32 CardNo;
     protected void Page_Load(object sender, EventArgs e)
     {
+        CardNo = Convert.ToInt32(Session["CardNo"]);
+        if (IsPostBack == false)
+        {
+            if (CardNo != -1)
+            {
+                DisplayStock();
+            }
+        }
+
+    }
+
+    private void DisplayStock()
+    {
+        clsStockCollection StockBook = new clsStockCollection();
+        StockBook.ThisStock.Find(CardNo);
+
+
+        txtCardNo.Text = StockBook.ThisStock.CardNo.ToString();
+        txtCardDescription.Text = StockBook.ThisStock.CardDescription;
+        txtCardType.Text = StockBook.ThisStock.CardType;
+        txtPrice.Text = Convert.ToString(StockBook.ThisStock.Price);
+        txtDateAdded.Text = StockBook.ThisStock.DateAdded.ToString();
+        chkAvailable.Checked = StockBook.ThisStock.Available;
 
     }
 
@@ -37,20 +61,34 @@ public partial class _1_DataEntry : System.Web.UI.Page
 
         if (Error == "")
         {
-            AnStock.CardNo = Convert.ToInt32(txtCardNo.Text); ;
+            AnStock.Available = chkAvailable.Checked; ;
             AnStock.CardDescription = CardDescription;
             AnStock.CardType = CardType;
             AnStock.Price = Convert.ToDecimal(Price);
             AnStock.DateAdded = Convert.ToDateTime(DateAdded);
+            clsStockCollection StockList = new clsStockCollection();
+            
+            if (CardNo == -1)
+            {
+                StockList.ThisStock = AnStock;
+                StockList.Add();
+            }
+            else
+            {
+                StockList.ThisStock.Find(CardNo);
+                StockList.ThisStock = AnStock;
+                StockList.Update();
+            }
+            Response.Redirect("StockList.aspx");
 
-            Session["AnStock"] = AnStock;
-            Response.Write("StockViewer.aspx");
+
         }
 
         else
         {
             lblError.Text = Error;
         }
+        
     }
     
 
